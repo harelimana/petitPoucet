@@ -1,0 +1,6 @@
+nbproject
+vendor
+web/images
+web/js
+web/css
+src/Utils/config.php
