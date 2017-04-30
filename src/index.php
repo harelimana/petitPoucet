@@ -1,40 +1,33 @@
 <?php
+
 //    session_start();
 use Axxa\Controller\FrontController;
+use Axxa\Utils\config;
+use Axxa\Utils\fct_db;
+use Axxa\Utils\fct_global;
 
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
+require_once dirname(__FILE__) . '../Utils/config.php';
+require_once dirname(__FILE__) . '../Utils/fct_db';
+require_once dirname(__FILE__) . '../Utils/fct_global';
 
 try {
     $connex = new PDO('mysql:host=localhost;dbname=personne', 'root', 'root');
 
-    $controller = new \Axxa\src\Controller\HomeController();
-
-    switch ($controller) {
-        case "HomeController":
-            $response = $controller->executeAction(array('action' => 'home'));
-        case "CategorieController":
-            $response = $controller->executeAction(array('action' => 'categorie'));
-        case "TravauxController":
-            $response = $controller->executeAction(array('action' => 'travaux'));
-        default:
-            $response = $controller->executeAction(array('action' => 'default'));
-    }
-    echo $response;
-
+    $frontController = new \Axxa\src\Controller\FrontController();
+    $frontController->processRequest();
+    
 } catch (PDOException $ex) {
     $ex->$message('error from PDO connection !');
 }
 
-//    session_start();
-require_once dirname(__FILE__) . '../base/config.php';
-
 // initialisation des variables
-$page = isset($_GET["p"]) ? $_GET["p"] : "public_home";
+$page = isset($_GET["pageName"]) ? $_GET["pageName"] : "home";
 
-if (file_exists("controler/" . $page . ".php")) {
-    include_once("controler/" . $page . ".php");
+if (file_exists("Controller/" . $page . ".php")) {
+    require_once dirname(__FILE__) . "Controller/" . $page . ".php";
 } else {
-    echo "error controler";
+    echo "error controller";
     exit;  // check if 'exit' is required here
 }
 if (preg_match("/^admin/i", $page) == TRUE) {
@@ -47,8 +40,8 @@ if (preg_match("/^admin/i", $page) == TRUE) {
 <div class="container">
     <div id='content'>
         <?php
-        if (file_exists("view/" . $page . ".php")) {
-            include_once("view/" . $page . ".php");
+        if (file_exists("View/Templates/" . $page . ".php")) {
+            include_once("View/Templates/" . $page . ".php");
         } else {
             echo "<h2>Erreur !</h2>";
             echo "<p>Vue non définie</p>";

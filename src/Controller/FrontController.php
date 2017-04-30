@@ -27,7 +27,7 @@ class FrontController extends DefaultController {
           $view->setTemplateName('main.tpl.html');
           $view->render();
          */
-    //    $parameters = $this->filterParameters($_REQUEST);
+       $parameters = $this->filterParameters($_REQUEST);
         try {
 
             $controller = $this->mappingControllers($parameters['pageName']);
@@ -49,14 +49,13 @@ class FrontController extends DefaultController {
         }
     }
     
-    
-/*
-    public function sanitize($param) {
-        return strip_tags(htmlentities($param));
+    public function sanitize($parameters) {
+        
+        return strip_tags(htmlentities($paramerters));
     }
 
     public function filterParameters() {
-        $pageName = isset($_REQUEST['p']) && !is_null($_REQUEST['p']) ? $this->sanitize($_REQUEST['p']) : 'home'; //maybe here will be set a switch casee for other routes
+        $pageName = isset($_REQUEST['pageName']) && !is_null($_REQUEST['pageName']) ? $this->sanitize($_REQUEST['pageName']) : 'home'; //maybe here will be set a switch casee for other routes
         $action = isset($_REQUEST['action']) && !is_null($_REQUEST['action']) ? $this->sanitize($_REQUEST['action']) : 'default';
         $method = $_SERVER['REQUEST_METHOD'];
         $parameters = array();
@@ -68,5 +67,5 @@ class FrontController extends DefaultController {
         }
 
         return array('method' => $method, 'action' => $action, 'pageName' => $pageName, 'parameters' => $parameters);
-    } */
+    }
 }
