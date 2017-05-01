@@ -1,12 +1,11 @@
 <?php
-
 //    session_start();
 use Axxa\Controller\FrontController;
 use Axxa\Utils\config;
 use Axxa\Utils\fct_db;
 use Axxa\Utils\fct_global;
 
-require_once dirname(__FILE__) . '/../vendor/autoload.php';
+require_once dirname(__FILE__) . '../vendor/autoload.php';
 require_once dirname(__FILE__) . '../Utils/config.php';
 require_once dirname(__FILE__) . '../Utils/fct_db';
 require_once dirname(__FILE__) . '../Utils/fct_global';

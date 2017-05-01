@@ -10,12 +10,12 @@ class categSenitize {
 
     public function categSanitize() {
         if (!isset($_SESSION["admin_user_id"]) || empty($_SESSION["admin_user_id"]) || !is_numeric($_SESSION["admin_user_id"]) || !is_numeric($_SESSION["access_level"]) || $_SESSION["access_level"] != 1) {
-            require_once(__FILE__) . "Entity/Categorie.php";
+            require_once dirname(__FILE__) . "Entity/Categorie.php";
             $result = getCategories(0);
         } else {
             $msg = "";
 
-            require_once (__FILE__) . "Entity/Categorie.php";
+            require_once dirname(__FILE__) . "Entity/Categorie.php";
 
             $get_action = isset($_GET["action"]) ? $_GET["action"] : "";
             $get_id = isset($_GET["user_id"]) ? $_GET["user_id"] : 0;
